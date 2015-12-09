@@ -15,6 +15,9 @@ Brief overview of interesting computer vision and machine learning topics
 
 ## Focus Areas
 
-### 1.Saliency Detection
+### 1. Saliency Detection
 ### 2. Color Constancy 
-### 3. 
+### 3. Object tracking 
+### 4. Image dehazing 
+### 5. Non-uniform illumination handling 
+
