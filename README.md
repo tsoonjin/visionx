@@ -19,3 +19,7 @@ Code for Robosub 2016
 
 ### `6. Learning`
 > Files related to application of machine learning 
+
+### `7. ROS Helper`
+> ROS related utility modules 
+
