@@ -1,6 +1,6 @@
 # TODO
 
-## Research 
+## 1.Research 
 - red channel prior to dehaze image 
 - SLAT algorithm to segment degraded color image 
 - explore different features i.e HOG, LBP, FAST, KAZE, 
@@ -18,7 +18,7 @@
 - using svm 
 - color constancy 
 
-## Taskrunners
+## 2.Taskrunners
 - arguments
   - without mission planner
   - static detection 
@@ -28,13 +28,13 @@
 - record time taken for each state 
 - record universal time taken when node exited
 
-## Detectors
+## 3.Detectors
 - handle only opencv image format 
 - define name of detector 
 - implement detect method that return output object 
 - update vision parameters from dynamic reconfigure 
 
-## DataType 
+## 4.DataType 
 ### Output
 - centroid of target 
 - isDetected  
@@ -43,8 +43,22 @@
 - angle from current heading to long side of object 
 
 
-## Utils
+## 5.Utils
+
 ### Visualizer
 - default black bg
   - overlay centroid of object, center of screen, dy and dx value, ratio of area, isDetected, outermost contour 
 
+### Preprocess 
+### Threshold 
+### Feature
+### Enhancement
+### Logger
+### Stats 
+
+## 6.Tool
+- vision_gui
+- trainer
+- tuner 
+
+## 7.Learning 
