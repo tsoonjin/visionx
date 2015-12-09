@@ -351,3 +351,119 @@ def getRail(img):
 def distanceTransform(gray):
     dt = cv2.distanceTransform(gray, cv2.cv.CV_DIST_L2,5)
     return cv2.cvtColor(gray, cv2.COLOR_GRAY2BGR)
+
+@staticmethod
+def rg(img):
+    b,g,r = cv2.split(img)
+    return cv2.absdiff(r,g)
+
+@staticmethod
+def conspicuityMaps(img): 
+    """Generate conspicutiy maps from intensity"""
+    b,g,r = cv2.split(img)
+    b = np.float32(b)
+    g = np.float32(g)
+    r = np.float32(r)
+    intensity = np.mean(np.array([b,g,r]), axis=0)
+    b /= intensity
+    g /= intensity
+    r /= intensity
+    b = cv2.normalize(b, 0, 255, cv2.NORM_MINMAX)*255
+    g = cv2.normalize(g, 0, 255, cv2.NORM_MINMAX)*255
+    r = cv2.normalize(r, 0, 255, cv2.NORM_MINMAX)*255
+    normBGR = cv2.merge((np.uint8(b),np.uint8(g),np.uint8(r)))
+    R = r - (g+b)/2
+    G = g - (r+b)/2
+    B = b - (r+g)/2
+    Y = (r+g)/2 - abs(r-g)/2
+    Y = Y.clip(min=0)
+    #out = cv2.cvtColor(np.uint8(intensity), cv2.COLOR_GRAY2BGR)
+    R = cv2.cvtColor(np.uint8(R), cv2.COLOR_GRAY2BGR)
+    B = cv2.cvtColor(np.uint8(B), cv2.COLOR_GRAY2BGR)
+    G = cv2.cvtColor(np.uint8(G), cv2.COLOR_GRAY2BGR)
+    Y = cv2.cvtColor(np.uint8(Y), cv2.COLOR_GRAY2BGR)
+    return np.hstack((B,G,R,Y)) 
+
+@staticmethod
+def orb(img):
+	orb = cv2.ORB_create()
+	kp = orb.detect(img, None)
+	kp, des = orb.compute(img, kp)
+	out = None
+	out = cv2.drawKeypoints(img, kp, out, color=(0,0,255), flags=0)
+	return out
+
+@staticmethod
+def harris(img,block=21,aperture=11,param=0.2):
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    img = VUtil.finlaynorm(img)
+    gray,g,r = cv2.split(img)
+    corner = cv2.cornerHarris(np.float32(gray),block,aperture,param)
+    corner = cv2.dilate(corner,None)
+    img[corner>0.01*corner.max()] = (0,0,255)
+    return img
+
+@staticmethod
+def fastDetector(img):
+    fast = cv2.FastFeatureDetector()
+    kp = fast.detect(img,None)
+    img = cv2.drawKeypoints(img, kp, color=(255,0,0))
+    return img
+
+@staticmethod
+def shiDetector(img):
+    corners = cv2.goodFeaturesToTrack(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY), 25, 0.01, 10)
+    corners = np.int0(corners)
+    for i in corners:
+        x,y = i.ravel()
+        cv2.circle(img,(x,y),3,255,-1)
+    return img
+                
+@staticmethod
+def briefDetector(img):
+    star = cv2.FeatureDetector_create('STAR')
+    brief = cv2.DescriptorExtractor_create('BRIEF')
+    kp = star.detect(img,None)
+    kp, desc = brief.compute(img, kp)
+    img = cv2.drawKeypoints(img, kp, color=(255,0,0))
+    return img
+
+@staticmethod
+def surfDetector(img):
+    surf = cv2.SURF(400)
+    kp,desc = surf.detectAndCompute(img ,None)
+    img = cv2.drawKeypoints(img, kp, color=(255,0,0))
+    return img
+
+@staticmethod
+def mserDetector(img):
+    mser = cv2.FeatureDetector_create('MSER')
+    kp = mser.detect(img)
+    orb = cv2.DescriptorExtractor_create('ORB')
+    kp, desc = orb.compute(img,kp)
+    img = cv2.drawKeypoints(img, kp, color=(255,0,0))
+    return img
+
+@staticmethod
+def generateSalientLAB(img):
+    blur = cv2.GaussianBlur(img, (9,9), 2)
+    l,a,b = cv2.split(cv2.cvtColor(blur, cv2.COLOR_LBGR2LAB))
+    mean_l = np.full(img.shape[:2], np.mean(l))
+    mean_a = np.full(img.shape[:2], np.mean(a))
+    mean_b = np.full(img.shape[:2], np.mean(b))
+    total = VUtil.euclid_dist([(l,mean_l),(a,mean_a),(b,mean_b)])
+    total = np.uint8(total)
+    return VUtil.toBGR(total, 'gray')
+
+@staticmethod
+def generateNewColor(img):
+    b,g,r = cv2.split(img)
+    c1 = VUtil.toBGR(np.uint8(np.arctan2(r,np.maximum(b,g))*255), 'gray')
+    c2 = VUtil.toBGR(np.uint8(np.arctan2(g,np.maximum(r,b))*255), 'gray')
+    c3 = VUtil.toBGR(np.uint8(np.arctan2(b,np.maximum(r,g))*255), 'gray')
+    denominator = cv2.pow(r-g,2)+cv2.pow(r-b,2)+cv2.pow(g-b,2)
+    l1 = VUtil.toBGR(cv2.pow(r-g,2)/denominator, 'gray')
+    l2 = VUtil.toBGR(cv2.pow(r-b,2)/denominator, 'gray')
+    l3 = VUtil.toBGR(cv2.pow(g-b,2)/denominator, 'gray')
+    return np.vstack((np.hstack((c1,c2,c3)),np.hstack((l1,l2,l3))))
+
