@@ -14,18 +14,19 @@
   - [`Configs`](#configs)
   - [`Tools`](#tools)
 
-## `1. System Architecture`
+## 1. System Architecture
+<img src="img/system_architecture.png">
 
-## `2. Logic`
-### `Taskrunners`
-### `ROSbridge`
+## 2. Logic
+### Taskrunners
+### ROSbridge
 
-## `3. Vision`
-### `Detectors`
-### `Utils`
-### `Learning`
-### `Pipelines`
+## 3. Vision
+### Detectors
+### Utils
+### Learning
+### Pipelines
 
-## `4. Common`
-### `Configs`
-### `Tools`
+## 4. Common
+### Configs
+### Tools
