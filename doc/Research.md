@@ -12,3 +12,9 @@ Brief overview of interesting computer vision and machine learning topics
 
 ### Online resources
 1. [Awesome Computer Vision by jbhuang0604](https://github.com/jbhuang0604/awesome-computer-vision)
+
+## Focus Areas
+
+### 1.Saliency Detection
+### 2. Color Constancy 
+### 3. 
