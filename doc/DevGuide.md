@@ -5,12 +5,12 @@
 - [`Logic`](#logic)
   - [`Taskrunners`](#taskrunners)
   - [`ROSbridge`](#rosbridge)
-- [`Vision`](#vision)
+- [`Vision`](#3.-vision)
   - [`Detectors`](#detectors)
   - [`Utils`](#utils)
   - [`Learning`](#learning)
   - [`Pipelines`](#pipelines)
-- [`Common`](#common)
+- [`Common`](#4.-common)
   - [`Configs`](#configs)
   - [`Tools`](#tools)
 
@@ -45,10 +45,19 @@
   - realtime callback when reconfigure
   
 ### Utils
+- `preprocess.py` processes image before training or object detection 
+- `threhold.py` contains various threholding and segmentation algorithms
+- `enhancement.py` refers to improving or recovering actual representation of image 
+- `features.py` extract features such as contour, edge, moments etc.
+- `stats.py` provides information related to image such as average hue, histogram etc.
+- `logger.py` is a wrapper around ROS logger 
 
 ### Learning
+Modules responsible for offline training 
 
 ### Pipelines
+Vision module that will operate concurrently while taskrunner is running to provide extra information through image processing 
+over sequence of images.
 
 ## 4. Common
 
@@ -62,3 +71,5 @@
 - `ParamConfig.py` stores vision_function and arguments pair to enable tuning of vision parameters 
 
 ### Tools
+- `vision_gui.py` tune parameters of vision algorithms 
+- `trainer.py` create training data from bag file 
