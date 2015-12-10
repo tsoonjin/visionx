@@ -18,8 +18,9 @@ class BaseComm(object):
         #Configuration file 
         self.config = config
         #State of the taskrunner
-        self.state = {'activated':False, 'preempted':False, 'completed':False,
-                       'static':False, 'alone':False}
+        self.state = {'activated':False, 'preempted':False, 'completed':False}
+        self.state['static'] = rospy.get_param('~static', False)
+        self.state['alone'] = rospy.get_param('~alone', False)
         #Task specific topics
         self.visionServerTopic = "/{}/mission_to_vision".format(config.name);
         self.missionServerTopic = "/{}/vision_to_mission".format(config.name);
@@ -120,19 +121,17 @@ class BaseComm(object):
 
     '''Navigation server requests'''
     
-    def move(self,forward=0.0, sidemove=0.0, turn=None, depth=None, relative=True, wait=True, duration=0.3):
+    def move(self,forward=0.0, sidemove=0.0, turn=None, depth=None, wait=True, duration=0.3):
         depth = depth if depth else self.heading['depth']
         if turn is None:
-            turn = self.data['heading']
-        elif relative:
-            turn = (turn+self.heading)%360 
+            turn = (turn+self.data['heading'])%360 
         goal = ControllerGoal(forward_setpoint=forward, heading_setpoint=turn, 
                 sidemove_setpoint=sidemove, depth_setpoint=depth)
         self.setNavServer.send_goal(goal)
         if  wait:
-        	self.setNavServer.wait_for_result()
+            self.setNavServer.wait_for_result()
         else:
-			self.setNavServer.wait_for_result(rospy.Duration(duration))
+	    self.setNavServer.wait_for_result(rospy.Duration(duration))
 
 if __name__ == "__main__":
     baseComm = BaseComm();
