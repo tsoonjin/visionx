@@ -1,16 +1,16 @@
 # Developer Guide
 
 ## Table of Contents
-- [`System Architecture`](#1.-system-architecture)
-- [`Logic`](#2.-logic)
+- [`System Architecture`](#1. system-architecture)
+- [`Logic`](#2. logic)
   - [`Taskrunners`](#taskrunners)
   - [`ROSbridge`](#rosbridge)
-- [`Vision`](#3.-vision)
+- [`Vision`](#3. vision)
   - [`Detectors`](#detectors)
   - [`Utils`](#utils)
   - [`Learning`](#learning)
   - [`Pipelines`](#pipelines)
-- [`Common`](#4.-common)
+- [`Common`](#4. common)
   - [`Configs`](#configs)
   - [`Tools`](#tools)
 
