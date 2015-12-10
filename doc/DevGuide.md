@@ -40,7 +40,10 @@
 ## 3. Vision
 
 ### Detectors
-
+- `SingleObjectDetector.py` takes as input an OpenCV color image and returns `Output`
+  - declare tunable params in config
+  - realtime callback when reconfigure
+  
 ### Utils
 
 ### Learning
