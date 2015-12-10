@@ -1,6 +1,7 @@
 # TODO
 
 ## 1.Research 
+- haar-like features
 - red channel prior to dehaze image 
 - SLAT algorithm to segment degraded color image 
 - explore different features i.e HOG, LBP, FAST, KAZE, 
