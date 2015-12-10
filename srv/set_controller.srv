@@ -1,0 +1,12 @@
+bool forward
+bool sidemove
+bool heading
+bool depth
+bool pitch
+bool roll
+bool forward_vel
+bool sidemove_vel
+bool topside
+bool navigation
+---
+bool complete
