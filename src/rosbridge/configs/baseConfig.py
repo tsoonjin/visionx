@@ -43,4 +43,4 @@ class BaseConfig(object):
         self.pub_list = pub_list
 
 if __name__ == "__main__":
-    baseConfig = BaseConfig("Test")
+    baseConfig = BaseConfig("Test", None)
