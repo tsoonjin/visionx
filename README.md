@@ -14,12 +14,12 @@ Code for Robosub 2016
 ### `4. Taskrunners`
 > Executable ROS nodes corresponding with individual Robosub 2016 tasks
 
-### `5. Standalone Tools`
+### `5. Tools`
 > Helper tools to increase efficiency during competition and pool tests 
 
 ### `6. Learning`
 > Files related to application of machine learning 
 
-### `7. ROS Helper`
+### `7. ROSbridge`
 > ROS related utility modules 
 
