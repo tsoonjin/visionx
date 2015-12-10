@@ -1,0 +1,15 @@
+bool search_request
+
+bool task_complete_request
+controller task_complete_ctrl
+
+bool fail_request
+bool centered
+
+int8 action
+
+---
+
+bool search_response
+bool task_complete_response
+controller data
