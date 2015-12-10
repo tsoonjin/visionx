@@ -62,6 +62,8 @@ add_service_files(
    FILES
    locomotion_mode.srv
    set_controller.srv
+   mission_to_vision.srv
+   vision_to_mission.srv
 )
 
 ## Generate actions in the 'action' folder
