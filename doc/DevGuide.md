@@ -1,8 +1,8 @@
 # Developer Guide
 
 ## Table of Contents
-- [`System Architecture`](#system-architecture)
-- [`Logic`](#logic)
+- [`System Architecture`](#1.-system-architecture)
+- [`Logic`](#2.-logic)
   - [`Taskrunners`](#taskrunners)
   - [`ROSbridge`](#rosbridge)
 - [`Vision`](#3.-vision)
