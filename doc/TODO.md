@@ -2,6 +2,8 @@
 
 ## 1.Research 
 - haar-like features
+- difference between feature descriptor and feature extractor
+- bag of words with SIFT example Vlfeat
 - red channel prior to dehaze image 
 - SLAT algorithm to segment degraded color image 
 - explore different features i.e HOG, LBP, FAST, KAZE, 
