@@ -13,10 +13,10 @@ class BaseComm(object):
     """Main communication class that interacts with main system"""
 
     def __init__(self, config):
-        #Trap signal
-        signal.signal(signal.SIGINT, self.handleInterupt)
-        #Configuration file 
-        self.config = config
+        #Task name
+        self.name = config.name
+        #Detector used
+        self.detector = config.detector
         #State of the taskrunner
         self.state = {'activated':False, 'preempted':False, 'completed':False}
         self.state['static'] = rospy.get_param('~static', False)
@@ -24,13 +24,10 @@ class BaseComm(object):
         #Task specific topics
         self.visionServerTopic = "/{}/mission_to_vision".format(config.name);
         self.missionServerTopic = "/{}/vision_to_mission".format(config.name);
-
         #Sensor data 
         self.data = {'heading':None, 'depth':None, 'frontcam':None, 'bottomcam':None}
         #Timeout parameters
         self.navTimeout = 5
-        #Movement parameters
-        self.move_params = {'xcoeff':2.5, 'ycoeff':3.0}
 
     '''Initilization'''
 
