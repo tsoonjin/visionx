@@ -2,3 +2,5 @@ ref/
 log/
 resources/
 *.sh
+*.swp
+*.pyc
