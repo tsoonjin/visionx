@@ -9,3 +9,34 @@
 6. Lack of multiple strategies for each task
 7. Did not stress algorithms enough during pool test 
 
+## Categories of tasks 
+1. Lane marker
+  - orange color. rectangle. 
+  - obtain heading from lane marker
+  - false positive when near other object 
+  - use aspect ratio 
+  - prone to breaking into two parts or holes due to bubbles and tether
+
+2. Buoys
+  - each buoy has tint of blue or green 
+  - hard to distinguish based on color alone 
+  - different hard required scanning at different height 
+  - top part of buoy is washed up making it hard to obtain full sphere 
+
+3. Poles
+  - detecting green color underwater or yellow not reliable 
+  - termination criteria 
+
+4. Shooting 
+  - locating center of board without any skewness 
+  - multiple color combinations 
+
+5. Front manipulation 
+  - Combination of colors in one object
+  - typically very small object 
+  - precision 
+
+6. Acoustic combo 
+  - Need to identify correctly octagon 
+  - Use vision cue to determine center of octagon 
+  - staying very close to object affects vision detection 
