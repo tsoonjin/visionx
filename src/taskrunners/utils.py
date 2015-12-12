@@ -39,6 +39,7 @@ def _executeTask(self, comm, states_list, outcomes_list):
         comm: Task specific communication module
     """
     sm = initSMACH(states_list, outcomes_list)
+    sm.userdata = comm      #set userdata to comm object to share data between states
     initIntroServer(comm.name, sm, '/MISSION/{}'.format(comm.name.upper()))
     try:
         sm.execute()
@@ -47,42 +48,81 @@ def _executeTask(self, comm, states_list, outcomes_list):
     finally:
         rospy.signal_shutdown('{} ended successfully'.format(comm.name))
     
-def setupUserdata(self, userdata, comm):
-    userdata.output = comm.
-    
-'''ROS initialization'''
+'''ROS related'''
+
 def startTask(self, comm, states_list, outcomes_list):
-    #Handle Ctrl+C 
+    #Handle Ctrl+C and kill
     signal.signal(signal.SIGINT, comm.handleInterupt)
+    signal.signal(signal.SIGTERK, comm.handleInterupt)
     #Initialize ROS node
     rospy.init_node(comm.name)
     _executeTask(comm, states_list, outcomes_list)
 
+def isDormant(self, comm):
+    return not comm.alone and not comm.activated
+
+'''Movement code'''
+
+def centerToObject(comm, mult=(1.5, 2.0), limit=0.05):
+    """Center to object of interest after detection
+    Args:
+        coeff: multiplier to forward and sidemove goals
+        limit: error between centroid of object and center before terminating
+    """
+    while True:
+        if comm.output.detected:
+            if(abs(comm.output.dx) <= limit and abs(comm.output.dy) <= limit):
+                break
+            else:
+                comm.move(f=mult[1]*comm.output.dy, sm=mult[0]*comm.output.dx, duration=0.5)
+
+def searchForward(comm, limit=2):
+    """Move forward slowly while detecting object of interest
+    Args:
+        limit: number of detection required before termination to remove false positive
+    """
+    count = 0
+    while True:
+        if count is limit:                     #stop searching after fulfilling limit
+            break
+        elif comm.output.detected:
+            count += 1
+        else:
+            comm.move(f=1.0, duration=0.5)     #search forward slowly
+
+'''Generic states'''
+
 class Disengage(smach.State):
-    """Standby while waiting for request from mission planner"""
+    """Standby while waiting for request from mission planner
+        outcomes_list: ['started', 'static_mode']
+    """
     def __init__(self, outcomes_list):
-        smach.State.__init__(self, outcomes=outcomes_list)
+        self.outcomes_list = outcomes_list
         self.start_time = None
+        self.sleep_duration = rospy.Duration(0.5)
+        smach.State.__init__(self, outcomes=outcomes_list)
 
     def execute(self, userdata):
         #Marks start of the state
         self.start_time = time.time()
+        if userdata.static:
+            return 'static_mode'     #only run vision algorithm without any movement
 
-        if self.comm.isKilled:
-            return 'aborted'
+        while isDormant(userdata): 
+            rospy.sleep(self.sleep_duration)
 
-        if self.comm.debug == 2:
-            self.comm.isAlone = False
-            self.comm.missionBridge("/bins/")
-            self.comm.register()
-            self.comm.debug = 1 #Reset to prevent multiple registration
-
-        while not self.comm.isStart:
-            if self.comm.isKilled: 
-                return 'aborted'
-            rospy.sleep(rospy.Duration(0.1))
-
-        self.comm.time = time.time()        #Start timer for task
-        if self.comm.debug <= 2:
-            self.comm.startPID()
+        self.start_time = time.time()        #Start timer for task
         return 'started'
+
+class StaticMode(smach.State):
+    """See-only mode where the vehicle is moved around by diver or manually to 
+    simulate specific scenario to test robustness of vision algorithm
+    """
+    def __init__(self, outcomes_list):
+        self.outcomes_list = outcomes_list
+        smach.State.__init__(self, outcomes=outcomes_list)
+    
+    def execute(self, userdata):
+        while not userdata.completed:
+            rospy.sleep(rospy.Duration(5.0))
+        return 'completed'
