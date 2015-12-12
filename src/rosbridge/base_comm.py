@@ -104,6 +104,7 @@ class BaseComm(object):
         elif req.abort_request:
             self.state['preempted'] = True
             self.state['activated'] = False
+            rospy.signal_shutdown("Interrupted")
             return mission_to_visionResponse(start_response=False,
                                              abort_response=True)
 
@@ -118,17 +119,19 @@ class BaseComm(object):
 
     '''Navigation server requests'''
     
-    def move(self,forward=0.0, sidemove=0.0, turn=None, depth=None, wait=True, duration=0.3):
-        depth = depth if depth else self.heading['depth']
+    def move(self,f=0.0, sm=0.0, turn=None, d=None, duration=3600):
+        """Sends goal to navigation server
+        Args:
+            duration: time allocated for a single goal to be completed.By default wait 
+            almost indefinitely
+        """
+        d = d if d else self.data['depth']
         if turn is None:
             turn = (turn+self.data['heading'])%360 
-        goal = ControllerGoal(forward_setpoint=forward, heading_setpoint=turn, 
-                sidemove_setpoint=sidemove, depth_setpoint=depth)
+        goal = ControllerGoal(forward_setpoint=f, heading_setpoint=turn, 
+                sidemove_setpoint=sm, depth_setpoint=d)
         self.setNavServer.send_goal(goal)
-        if  wait:
-            self.setNavServer.wait_for_result()
-        else:
-	    self.setNavServer.wait_for_result(rospy.Duration(duration))
+        self.setNavServer.wait_for_result(rospy.Duration(duration))
 
 if __name__ == "__main__":
     baseComm = BaseComm();
