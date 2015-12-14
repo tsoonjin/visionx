@@ -56,5 +56,5 @@ Brief overview of interesting computer vision and machine learning topics
   - [Best-Buddies Similarity Measure](https://drive.google.com/open?id=0B8rRUzf-5h4fdm1rZVV1ODhnOXc)
   - [A Robust Template Matching based on reducing folks](https://drive.google.com/open?id=0B8rRUzf-5h4fSWxCVDBzR0VFQm8)
   
-### 7. 
+
   
