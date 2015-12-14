@@ -40,3 +40,21 @@
   - Need to identify correctly octagon 
   - Use vision cue to determine center of octagon 
   - staying very close to object affects vision detection 
+  
+## Prior information
+  - estimated location 
+  - size of actual object
+  - what is around the object like other buoy 
+  - orientation of object 
+  - color of object
+  - time to find object 
+
+## Things that needed to be done at Robosub 
+  -  automate checking of system 
+  -  retrieve and analyze bags quickly after each practice round 
+  -  sync code with vehicle efficiently
+  -  integrated tests for code 
+  -  change and save parameters quickly
+  -  backup plans for every state in taskrunner 
+  -  list of things to be tested during practice run for a particular task 
+  -  systematic ways to collect and annotate data 
