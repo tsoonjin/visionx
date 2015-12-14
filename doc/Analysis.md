@@ -58,3 +58,8 @@
   -  backup plans for every state in taskrunner 
   -  list of things to be tested during practice run for a particular task 
   -  systematic ways to collect and annotate data 
+  -  Extract useful information from collected data to give insight about collected data
+
+## Ideas
+  - track other landmarks in the pool
+  - underwater simulation to create perturbation and turbid condition of water in Robosub 
