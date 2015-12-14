@@ -49,6 +49,7 @@ Brief overview of interesting computer vision and machine learning topics
   - [Tracking of Multiple Objects Through Occlusions](https://drive.google.com/open?id=0B8rRUzf-5h4fajlRWld6eFBFNUU)
   - [Ensemble Tracking](https://drive.google.com/open?id=0B8rRUzf-5h4fTGV5Mm8zWmVGYzg)
   - [Using Super-color Pixel Descriptors to Track Relevant Cue for Underwater Images](https://drive.google.com/open?id=0B8rRUzf-5h4fcmVvdFhqVm0wT0E)
+  - 
 
 ### 6. Template Matching 
   - [Object Tracking using Log Polar Transformation](https://drive.google.com/open?id=0B8rRUzf-5h4fXzEtbVI5TzA2bUk)
@@ -56,5 +57,13 @@ Brief overview of interesting computer vision and machine learning topics
   - [Best-Buddies Similarity Measure](https://drive.google.com/open?id=0B8rRUzf-5h4fdm1rZVV1ODhnOXc)
   - [A Robust Template Matching based on reducing folks](https://drive.google.com/open?id=0B8rRUzf-5h4fSWxCVDBzR0VFQm8)
   
-
+### 7. Temporal Model
+  - [Robust Tracking-by-Detection using a Detector Confidence Particle Filter](https://drive.google.com/open?id=0B8rRUzf-5h4fSXVJQWpsN3RjZ2s)
+  - [Comparing A Kalman Filter and Particle Filter in Multiple Object Tracking](https://drive.google.com/open?id=0B8rRUzf-5h4fS0h2QTRXTUZ5cUU)
+  - [Particle Filters in Robotics](https://drive.google.com/open?id=0B8rRUzf-5h4fb1VzMWdkQmZSWjg)
+  - [Mean-shift Clustering](https://drive.google.com/open?id=0B8rRUzf-5h4fcTB3SXpjOW5WREU)
+  - [Single-camera Three-dimensional Tracking of Underwater Objects](https://drive.google.com/open?id=0B8rRUzf-5h4fZlNibnJkaFFhSUE)
+  
+### 8. Learning-based Object Classification
+  
   
