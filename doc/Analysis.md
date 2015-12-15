@@ -78,3 +78,12 @@
   - [using rostop](http://wiki.ros.org/rqt_top)
   - [using ParamEdit](http://wiki.ros.org/rosgui_paramedit)
   
+## Useful libraries
+  - [Caffe Deep Learning Framework](http://caffe.berkeleyvision.org/)
+  - [Scikit-learn](http://scikit-learn.org/stable/)
+  - [NoLearn: Wrapper for Caffe to work with Scikit](https://pythonhosted.org/nolearn/)
+  - [OverFeat: CNN image classifier](https://github.com/sermanet/OverFeat)
+  - [PyVision: MOSSE Tracker](https://github.com/sermanet/OverFeat)
+  - [PyBayes: Recursive Bayesian Filtering](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python)
+  - [FANN" Fast Artificial Neural Network](http://leenissen.dk/fann/wp/)
+  - [Faster R-CNN](https://github.com/rbgirshick/fast-rcnn)
