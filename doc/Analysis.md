@@ -58,7 +58,8 @@
   -  backup plans for every state in taskrunner 
   -  list of things to be tested during practice run for a particular task 
   -  systematic ways to collect and annotate data 
-  -  Extract useful information from collected data to give insight about collected data
+  -  extract useful information from collected data to give insight about collected data
+  -  automatic caliberation of camera 
 
 ## Ideas
   - track other landmarks in the pool
