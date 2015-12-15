@@ -12,6 +12,7 @@ Brief overview of interesting computer vision and machine learning topics
 
 ### Online resources
 1. [Awesome Computer Vision by jbhuang0604](https://github.com/jbhuang0604/awesome-computer-vision)
+2. [Awesome Random Forest by kjw0612](https://github.com/kjw0612/awesome-random-forest)
 
 ## Focus Areas
 
