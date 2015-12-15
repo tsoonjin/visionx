@@ -63,3 +63,18 @@
 ## Ideas
   - track other landmarks in the pool
   - underwater simulation to create perturbation and turbid condition of water in Robosub 
+  
+## ROS Nice Tools 
+  - [using rqt_bag](http://wiki.ros.org/rqt_bag)
+  - [using topic_tools](http://wiki.ros.org/topic_tools)
+    - mux 
+    - transform
+    - drop 
+  - [using visp](http://wiki.ros.org/visp) 
+  - [using rosh](http://wiki.ros.org/rosh)
+  - [using ecto](http://plasmodic.github.io/ecto/)
+  - [using bag_tools](http://wiki.ros.org/bag_tools)
+  - [writing plugin for rqt](http://wiki.ros.org/rqt/Tutorials/Writing%20a%20Python%20Plugin)
+  - [using rostop](http://wiki.ros.org/rqt_top)
+  - [using ParamEdit](http://wiki.ros.org/rosgui_paramedit)
+  
