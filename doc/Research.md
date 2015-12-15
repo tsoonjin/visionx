@@ -66,5 +66,7 @@ Brief overview of interesting computer vision and machine learning topics
   - [Single-camera Three-dimensional Tracking of Underwater Objects](https://drive.google.com/open?id=0B8rRUzf-5h4fZlNibnJkaFFhSUE)
   
 ### 8. Learning-based Object Classification
+
+### 9. Underwater Camera Caliberation
   
   
