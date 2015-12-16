@@ -68,10 +68,8 @@ Brief overview of interesting computer vision and machine learning topics
   - [Particle Filters in Robotics](https://drive.google.com/open?id=0B8rRUzf-5h4fb1VzMWdkQmZSWjg)
   - [Mean-shift Clustering](https://drive.google.com/open?id=0B8rRUzf-5h4fcTB3SXpjOW5WREU)
   - [Single-camera Three-dimensional Tracking of Underwater Objects](https://drive.google.com/open?id=0B8rRUzf-5h4fZlNibnJkaFFhSUE)
-  
-### 8. Learning-based Object Classification
 
-### 9. Underwater Camera Caliberation
+### 8. Underwater Camera Caliberation
   - using stastical measur to tune camera such as contrast, brightness and distribution of color channel
   - natural image statistics
     - representating image: pixel, fourier and wavelet
@@ -79,4 +77,7 @@ Brief overview of interesting computer vision and machine learning topics
     - what makes a good representation: mutual information
   - entropy
   - noise
+  
+### 9. Segmentation
+  - [A Three-stage Approach for Segmenting Degraded Color Images: Smoothing, Lifting and Thresholding (SLaT)](https://drive.google.com/open?id=0B8rRUzf-5h4fYnVOUlZJQWtJX0k)
   
