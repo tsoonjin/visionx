@@ -69,5 +69,11 @@ Brief overview of interesting computer vision and machine learning topics
 ### 8. Learning-based Object Classification
 
 ### 9. Underwater Camera Caliberation
-  
+  - using stastical measur to tune camera such as contrast, brightness and distribution of color channel
+  - natural image statistics
+    - representating image: pixel, fourier and wavelet
+    - observations: second-order pixel correlation, 1/f power law of frequency domain energy 
+    - what makes a good representation: mutual information
+  - entropy
+  - noise
   
