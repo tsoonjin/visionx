@@ -81,3 +81,9 @@ Brief overview of interesting computer vision and machine learning topics
 ### 9. Segmentation
   - [A Three-stage Approach for Segmenting Degraded Color Images: Smoothing, Lifting and Thresholding (SLaT)](https://drive.google.com/open?id=0B8rRUzf-5h4fYnVOUlZJQWtJX0k)
   
+### 10. Learning-based Object Recognition
+  - [You Only Look Once: Unified, Real-Time Object Detection](https://drive.google.com/open?id=0B8rRUzf-5h4fZ0pnRnFMZHhCV2s)
+  - [Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://drive.google.com/open?id=0B8rRUzf-5h4fQWJxTVVHTWI3Tms)
+  - [Multiple Object Tracking using Kalman Filter and Optical Flow](https://drive.google.com/open?id=0B8rRUzf-5h4fQkF6TE9UWVB4eFU)
+
+  
