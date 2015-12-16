@@ -1,26 +1,10 @@
 # TODO
 
-## 1.Research 
-- haar-like features
-- difference between feature descriptor and feature extractor
-- bag of words with SIFT example Vlfeat
-- red channel prior to dehaze image 
-- SLAT algorithm to segment degraded color image 
-- explore different features i.e HOG, LBP, FAST, KAZE, 
-- saliency detection 
-- ensemble method i.e boosting 
-- bayesian filtering to make use of prior information 
-- distance estimation from monocular image 
-- combining global and local features
-- combining discriminative, generative and temporal model 
-- particle filtering 
-- online and offline learning 
-- maximum margin correlation filter MOSSE
-- deformable part model and usage of bag of words
-- using rnn and cnn to classify image 
-- using svm 
-- color constancy 
-
+## 1. Pooltest 
+  - gather varying amount of bag data for first session under different illumination and scenarios 
+  - start forming backup plan for each state early 
+  - test motion early
+  
 ## 2.Taskrunners
 - arguments
   - without mission planner
