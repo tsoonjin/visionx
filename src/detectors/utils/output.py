@@ -43,6 +43,3 @@ class Output(object):
     def detected(self):
         return self._centroid   #object detected only when centroid is set
 
-if __name__ == "__main__":
-    output = Output(cv2.imread("../../test/resources/img/bin1.jpg"))
-    print(output.detected)

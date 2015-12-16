@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+import cv2
+
+from .stats import *
 
 @staticmethod
 def meanFilter(chan):
@@ -37,20 +40,18 @@ def enhance_tan(img):
     out = cv2.merge((b,g,r))
     return out
 
-@staticmethod
 def util_iace(channel):
    min__val, max__val, min_loc, max_loc = cv2.minMaxLoc(channel)
-   min_val, max_val = VUtil.hist_info(channel)
+   min_val, max_val = hist_info(channel)
    channel_ = (channel - min__val)/(max__val-min__val)*255.0  
    #channel_ = (channel - min_val)/(max_val-min_val)*255.0  
    return channel_
 
-@staticmethod
 def iace(img):
    b,g,r = cv2.split(img) 
-   b_ = VUtil.util_iace(b) 
-   g_ = VUtil.util_iace(g)
-   r_ = VUtil.util_iace(r) 
+   b_ = util_iace(b) 
+   g_ = util_iace(g)
+   r_ = util_iace(r) 
    out = cv2.merge((np.uint8(b_),np.uint8(g_),np.uint8(r_))) #scale up to 255 range
    return out
 
@@ -328,7 +329,6 @@ def finlayiter(img,cycle=2):
     out = cv2.merge((np.uint8(b),np.uint8(g),np.uint8(r)))
     return out
 
-@staticmethod 
 def finlaynorm(img,cycle=2):
     b,g,r = cv2.split(img)
     b = np.float32(b)
