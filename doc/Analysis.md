@@ -40,3 +40,51 @@
   - Need to identify correctly octagon 
   - Use vision cue to determine center of octagon 
   - staying very close to object affects vision detection 
+  
+## Prior information
+  - estimated location 
+  - size of actual object
+  - what is around the object like other buoy 
+  - orientation of object 
+  - color of object
+  - time to find object 
+
+## Things that needed to be done at Robosub 
+  -  automate checking of system 
+  -  retrieve and analyze bags quickly after each practice round 
+  -  sync code with vehicle efficiently
+  -  integrated tests for code 
+  -  change and save parameters quickly
+  -  backup plans for every state in taskrunner 
+  -  list of things to be tested during practice run for a particular task 
+  -  systematic ways to collect and annotate data 
+  -  extract useful information from collected data to give insight about collected data
+  -  automatic caliberation of camera 
+
+## Ideas
+  - track other landmarks in the pool
+  - underwater simulation to create perturbation and turbid condition of water in Robosub 
+  
+## ROS Nice Tools 
+  - [using rqt_bag](http://wiki.ros.org/rqt_bag)
+  - [using topic_tools](http://wiki.ros.org/topic_tools)
+    - mux 
+    - transform
+    - drop 
+  - [using visp](http://wiki.ros.org/visp) 
+  - [using rosh](http://wiki.ros.org/rosh)
+  - [using ecto](http://plasmodic.github.io/ecto/)
+  - [using bag_tools](http://wiki.ros.org/bag_tools)
+  - [writing plugin for rqt](http://wiki.ros.org/rqt/Tutorials/Writing%20a%20Python%20Plugin)
+  - [using rostop](http://wiki.ros.org/rqt_top)
+  - [using ParamEdit](http://wiki.ros.org/rosgui_paramedit)
+  
+## Useful libraries
+  - [Caffe Deep Learning Framework](http://caffe.berkeleyvision.org/)
+  - [Scikit-learn](http://scikit-learn.org/stable/)
+  - [NoLearn: Wrapper for Caffe to work with Scikit](https://pythonhosted.org/nolearn/)
+  - [OverFeat: CNN image classifier](https://github.com/sermanet/OverFeat)
+  - [PyVision: MOSSE Tracker](https://github.com/sermanet/OverFeat)
+  - [PyBayes: Recursive Bayesian Filtering](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python)
+  - [FANN" Fast Artificial Neural Network](http://leenissen.dk/fann/wp/)
+  - [Faster R-CNN](https://github.com/rbgirshick/fast-rcnn)
