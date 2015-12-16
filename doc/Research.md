@@ -28,6 +28,8 @@ Brief overview of interesting computer vision and machine learning topics
   - [Color Constancy using Local Color Shift](https://drive.google.com/open?id=0B8rRUzf-5h4fRTZ2WDBxVmxVcjg)
   - [Effective Illuminant Estimation for Color Constancy using Grey Pixels](https://drive.google.com/open?id=0B8rRUzf-5h4fS1pDeHJnTFhOQTA)
   - [Comprehensive Normalization in Log Space](https://drive.google.com/open?id=0B8rRUzf-5h4fS1pDeHJnTFhOQTA)
+  - [A New Color Correction Method For Underwater Imaging](https://drive.google.com/open?id=0B8rRUzf-5h4fSW0xa3Z1WUdtRU0)
+  - [Combine multiple color constancy algorithms](https://drive.google.com/open?id=0B8rRUzf-5h4fbFRnX1gxWUczVTQ)
   
 ### 3. Underwater Image Recovery
   - [Learning-based Illumination Estimation using Simple Features](https://drive.google.com/open?id=0B8rRUzf-5h4fYXBNUG1sd01VMHc)
@@ -35,6 +37,7 @@ Brief overview of interesting computer vision and machine learning topics
   - [A motion compensated filtering approach to remove sunlight flicker](https://drive.google.com/open?id=0B8rRUzf-5h4fcGJ5WnVQSDZac2M)
   - [Automatic red-channel underwater image restoration](https://drive.google.com/open?id=0B8rRUzf-5h4fYmlaQXc5NmstRWs)
   - [Enhancing Underwater Images and Videos by Fusion](https://drive.google.com/open?id=0B8rRUzf-5h4fQ1FBM2dDMGdBODg)
+  
   
 ### 4. Features 
   - [High Level Features for Underwater Place Recognition](https://drive.google.com/open?id=0B8rRUzf-5h4fc0VKak1PRUxQZW8)
