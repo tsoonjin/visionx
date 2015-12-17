@@ -2,13 +2,17 @@
 """Contains classes and functions that generate details that will be used for localization
 and tracking of object"""
 import cv2
+from .draw import *
+
+'''COLOR CODE'''
+CONTOUR_COLOR = (102, 0, 102)
 
 class Output(object):
     """Stores details after running object detection"""
     def __init__(self, cvimg):
         #Input image details
         self._y, self._x = cvimg.shape[:2]
-        self.center = (self._x/2, self._y/2)                        
+        self.center = (int(self._x/2), int(self._y/2))                        
         self.total_area = self._x*self._y
 
         #Output image details
@@ -17,8 +21,10 @@ class Output(object):
         self.dy = None
         self._area_ratio = None
         self.angle = None                               #angle from major axis of object
-        self.cnts = None                                #outermost contour of object
+        self._cnts = None                                #outermost contour of object
+        self.processed = {}
         self.outimg = cvimg
+        self.debugimg = np.zeros_like(cvimg)
 
     @property
     def centroid(self):
@@ -42,4 +48,19 @@ class Output(object):
     @property
     def detected(self):
         return self._centroid   #object detected only when centroid is set
+
+    @property
+    def contours(self):
+        return self._cnts
+
+    @contours.setter
+    def contours(self, value):
+        self._cnts = value
+        self.draw_img()
+
+    def draw_img(self):
+        draw_cross(self.outimg, self.centroid)
+        self.debugimg = create_debugimg(self)
+        cv2.drawContours(self.outimg, self._cnts, -1, CONTOUR_COLOR, 5)
+        cv2.drawContours(self.debugimg, self._cnts, -1, CONTOUR_COLOR, 5)
 

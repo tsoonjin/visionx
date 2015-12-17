@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+import cv2
 
 @staticmethod 
 def getAspRatio(cnt):
@@ -104,8 +105,7 @@ def approxCnt(cnt,offset=0.05):
     approx = cv2.approxPolyDP(cnt, epsilon, True)
     return approx
 
-@staticmethod
-def getCentroid(cnt):
+def get_centroid(cnt):
     mom = cv2.moments(cnt)
     centroid_x = int((mom['m10']+0.0001)/(mom['m00']+0.0001))
     centroid_y = int((mom['m01']+0.0001)/(mom['m00']+0.0001))

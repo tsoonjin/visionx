@@ -2,6 +2,18 @@
 import cv2
 import numpy as np
 
+def checkRectangle(cnt,ratio_limit=1.2):
+    rect = cv2.minAreaRect(cnt)
+    rect_area = rect[1][0]*rect[1][1]
+    ratio = rect_area/(cv2.contourArea(cnt)+0.001)
+    return ratio < ratio_limit
+
+def checkCircle(cnt):
+    circle = cv2.minEnclosingCircle(cnt)
+    circle_area = (circle[1]**2)*math.pi
+    ratio = circle_area/(cv2.contourArea(cnt)+0.001)
+    return ratio < 1.5
+
 def rectify(img,rect):
     h = np.int0(np.around(cv2.cv.BoxPoints(rect)))
     h = h.reshape((4,2))
@@ -44,8 +56,9 @@ def calc_hist(src):
     h=np.flipud(h)
     return np.uint8(h)
 
-def resize(img, x, y, flagg=cv2.INTER_NEAREST):
-    return cv2.resize(img, fx=x, fy=y, flag=flagg)
+def resize(img, scale=2):
+    scale = 1/scale
+    return cv2.resize(img, (int(img.shape[1]*scale), int(img.shape[0]*scale)))
 
 def blend(img1, a, img2, b, g):
     return cv2.addWeighted(img1, a, img2, b, g)
