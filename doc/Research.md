@@ -14,6 +14,9 @@ Brief overview of interesting computer vision and machine learning topics
 1. [Awesome Computer Vision by jbhuang0604](https://github.com/jbhuang0604/awesome-computer-vision)
 2. [Awesome Random Forest by kjw0612](https://github.com/kjw0612/awesome-random-forest)
 3. [Kalman and Bayesian Filters in Python](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python)
+4. [pyParticleEst](https://github.com/jerkern/pyParticleEst)
+5. [Particle Filter Demo](http://scipy.github.io/old-wiki/pages/Cookbook/ParticleFilter)
+
 
 ## Focus Areas
 
