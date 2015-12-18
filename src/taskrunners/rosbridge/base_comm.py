@@ -15,8 +15,9 @@ class BaseComm(object):
     def __init__(self, config):
         #Task name
         self.name = config.name
-        #Detector used
+        #Get from config file
         self.detector = config.detector
+        self.publishers = config.publishers
         #State of the taskrunner
         self.state = {'activated':False, 'preempted':False, 'completed':False}
         self.state['static'] = rospy.get_param('~static', False)
@@ -42,11 +43,6 @@ class BaseComm(object):
         #Bottomcam subscriber
         rospy.Subscriber(sys_msgs['bottomcam_raw'].topic, sys_msgs['bottomcam_raw'].type, self.cam_cb)
 
-
-    def initPub(self):
-        sys_msgs = self.config.sys_msgs       
-        #Vision result publisher
-        rospy.Publisher(sys_msgs['vision_output'].topic, sys_msgs['vision_output'].type)
 
     def initService(self):
         """Initialize connections with mission planner"""
