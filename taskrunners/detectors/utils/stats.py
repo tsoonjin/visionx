@@ -56,7 +56,7 @@ def calc_hist(src):
     h=np.flipud(h)
     return np.uint8(h)
 
-def resize(img, scale=2):
+def resize(img, scale=2.0):
     scale = 1/scale
     return cv2.resize(img, (int(img.shape[1]*scale), int(img.shape[0]*scale)))
 
