@@ -18,6 +18,8 @@ Brief overview of interesting computer vision and machine learning topics
 5. [Particle Filter Demo](http://scipy.github.io/old-wiki/pages/Cookbook/ParticleFilter)
 6. [Awesome deep learning](https://github.com/ChristosChristofidis/awesome-deep-learning)
 7. [Awesome machine learning](https://github.com/josephmisiti/awesome-machine-learning)
+8. [Data Science Delivered](https://github.com/ianozsvald/data_science_delivered)
+
 
 
 ## Focus Areas
