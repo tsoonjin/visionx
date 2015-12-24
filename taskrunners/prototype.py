@@ -12,6 +12,7 @@ from rosbridge.base_comm import BaseComm
 from detectors.utils.conversion import *
 from detectors.utils.stats import *
 
+
 class Prototype(object):
 
     def __init__(self):
@@ -28,15 +29,22 @@ class Prototype(object):
 
     def detect(self, cvimg):
         output = cvimg
+        if len(self.imgs) == 4:
+            output = attenuate_flicker()
         return output
-
 
     def handleInterrupt(self, signal, frame):
         rospy.signal_shutdown("Preeempted")
         
+    def addImg(self, cvimg):
+        self.imgs.append(cvimg)
+        if len(self.imgs) > 4:
+            self.imgs.popleft()
+
     '''Callbacks''' 
     def cam_cb(self, rosimg):
         cvimg = resize(readCompressed(rosimg), 3.0)   #Scale down original image by 3
+        self.addImg(cvimg)
         output = writeCompressed(self.detect(cvimg))
         self.processed.publish(output)
 
