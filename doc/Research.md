@@ -92,5 +92,7 @@ Brief overview of interesting computer vision and machine learning topics
   - [You Only Look Once: Unified, Real-Time Object Detection](https://drive.google.com/open?id=0B8rRUzf-5h4fZ0pnRnFMZHhCV2s)
   - [Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks](https://drive.google.com/open?id=0B8rRUzf-5h4fQWJxTVVHTWI3Tms)
   - [Multiple Object Tracking using Kalman Filter and Optical Flow](https://drive.google.com/open?id=0B8rRUzf-5h4fQkF6TE9UWVB4eFU)
+  
+### 11. Importance of feature learning and selecting features
 
   
