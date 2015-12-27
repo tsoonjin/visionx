@@ -88,3 +88,7 @@
   - [PyBayes: Recursive Bayesian Filtering](https://github.com/rlabbe/Kalman-and-Bayesian-Filters-in-Python)
   - [FANN" Fast Artificial Neural Network](http://leenissen.dk/fann/wp/)
   - [Faster R-CNN](https://github.com/rbgirshick/fast-rcnn)
+
+## Improved practices 
+  - [py.test](http://pytest.org/latest/)
+  
