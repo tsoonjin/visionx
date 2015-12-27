@@ -12,6 +12,69 @@ from rosbridge.base_comm import BaseComm
 from detectors.utils.conversion import *
 from detectors.utils.stats import *
 
+
+def minkowski_norm(grayimg, p):
+    white_grayimg = np.power(np.sum(np.power(grayimg, p)), 1.0/p)
+    return white_grayimg
+
+def color_preprocess(img):
+    """Remove clipped pixels, median filter and resize"""
+    img = cv2.medianBlur(img, 5)
+    clahe = cv2.createCLAHE(clipLimit=2.0)
+    b,g,r = cv2.split(img)
+    b = clahe.apply(b)
+    g = clahe.apply(g)
+    r = clahe.apply(r)
+    return cv2.merge((b,g,r))
+
+def grayworld_norm2(img):
+    b,g,r = cv2.split(img)
+    est = np.mean([b,g,r])
+    b = np.divide(est, np.mean(b))*b
+    b = b.clip(max=255)
+    g = np.divide(est, np.mean(g))*g
+    g = g.clip(max=255)
+    r = np.divide(est, np.mean(r))*r
+    r = r.clip(max=255)
+    return cv2.merge((np.uint8(b), np.uint8(g), np.uint8(r)))
+
+def grayworld_norm1(img):
+    b,g,r = cv2.split(img)
+    est = np.max([np.mean(b), np.mean(g), np.mean(r)])
+    b = est/np.mean(b)*b
+    b = b.clip(max=255)
+    g = est/np.mean(g)*g
+    g = g.clip(max=255)
+    r = est/np.mean(r)*r
+    r = r.clip(max=255)
+    return cv2.merge((np.uint8(b), np.uint8(g), np.uint8(r)))
+
+def max_rgb(img):
+    """Based on Land's retinex theory"""
+    b,g,r = cv2.split(img)
+    b = np.float32(b)/np.max(b)*b
+    g = np.float32(g)/np.max(g)*g
+    r = np.float32(r)/np.max(r)*r
+    return cv2.merge((np.uint8(b), np.uint8(g), np.uint8(r)))
+
+def log_normalization(img):
+    """Non-iterative comprehensive normalization of color
+    Only returns a descriptor cannot be displayed correctly
+    """
+    b,g,r = cv2.split(img)
+    b = np.nan_to_num(np.log(np.float32(b)))
+    mean_b = np.mean(b)
+    g = np.nan_to_num(np.log(np.float32(g)))
+    mean_g = np.mean(g)
+    r = np.nan_to_num(np.log(np.float32(r)))
+    mean_r = np.mean(r)
+    mean_bgr = (b+g+r)/3
+    b = np.exp(b - mean_b - mean_bgr)
+    g = np.exp(g - mean_g - mean_bgr)
+    r = np.exp(r - mean_r - mean_bgr)
+    output = img
+    return output
+
 '''Finlayson Color Constant Object Recognition'''
 def double_opp(chan1, chan2):
     ratio = np.divide(np.float32(chan1), np.float32(chan2))
@@ -29,6 +92,8 @@ def weight_haze(img):
     """Calculates haze veil of image
     Returns:
         y : luminance component which is grayscale
+    Notes:
+        Should apply only to blue and green channels
     """
     estimate = np.mean(cv2.GaussianBlur(img, (5,5), 11))/255.0
     depth = 255 - img*estimate
@@ -45,18 +110,8 @@ def weight_salient(img):
     L,a,b = cv2.split(cv2.cvtColor(img, cv2.COLOR_BGR2Lab))
     mean_vector = np.divide((np.float32(L) + np.float32(a) + np.float32(b)), 3)
     output = np.linalg.norm([mean_vector - cv2.GaussianBlur(a, (3,3), 0)], axis=0)
-    return output/255.0
+    return (output/np.max(output))
     
-
-def weight_exposedness(img):
-    """Calculates exposedness map by modelling a Gaussian with standard deviation of 0.25
-    Adapted to use hue channel and inverse it to obtain better result
-    """
-    h,s,l = cv2.split(cv2.cvtColor(img, cv2.COLOR_BGR2HLS))
-    output = np.exp(-(np.power(np.float32(h)/255.0 - 0.5, 2))/0.125)
-    output = (255 - output*255)/255.0
-    output = output.clip(max=1)
-    return output
 
 def normalize_weights(weight_maps):
     total_weights = np.sum(weight_maps, axis=0)
@@ -95,8 +150,7 @@ class Prototype(object):
         return output
 
     def detect(self, cvimg):
-        b,g,r = cv2.split(cvimg)
-        output = enhance_by_fusion(cvimg)
+        output = grayedge(cvimg)
         return output
 
     def handleInterrupt(self, signal, frame):
@@ -109,7 +163,7 @@ class Prototype(object):
 
     '''Callbacks''' 
     def cam_cb(self, rosimg):
-        cvimg = resize(readCompressed(rosimg), 3.0)   #Scale down original image by 3
+        cvimg = resize(readCompressed(rosimg), 2.0)   #Scale down original image by 3
         self.addImg(cvimg)
         output = writeCompressed(self.detect(cvimg))
         self.processed.publish(output)
