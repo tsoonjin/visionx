@@ -13,6 +13,26 @@ from detectors.utils.conversion import *
 from detectors.utils.stats import *
 
 
+def acce(img):
+    "Automatic Color Contrast Enhancement"""
+    b,g,r = cv2.split(img)
+    y,u,v = cv2.split(cv2.cvtColor(img, cv2.COLOR_BGR2YUV))
+    y = np.float32(y)/255.0
+    u = np.float32(u)/255.0
+    v = np.float32(v)/255.0
+    y_adjust = 0.5 - np.mean(y)
+    y_n = y + y_adjust*(1 - y)
+    u_adjust = 0.04 - np.mean(u)
+    u_n = u + u_adjust*(0.596 - u)
+    v_adjust = -0.04 - np.mean(v)
+    v_n = v + v_adjust*(0.523 - v)
+    F = cv2.cvtColor(cv2.merge((np.uint8(y_n*255), np.uint8(u_n*255), np.uint8(v_n*255))), cv2.COLOR_YUV2BGR)
+    V_min = max(np.max([np.min(b)/255.0, np.min(g)/255.0, np.min(r)/255.0]), 0.008)
+    V_max = min(np.max([np.max(b)/255.0, np.max(g)/255.0, np.max(r)/255.0]), 0.992)
+    output = np.divide((F - V_min), V_max - V_min)
+    return np.uint8(output)
+
+
 def minkowski_norm(grayimg, p):
     white_grayimg = np.power(np.sum(np.power(grayimg, p)), 1.0/p)
     return white_grayimg
@@ -150,7 +170,7 @@ class Prototype(object):
         return output
 
     def detect(self, cvimg):
-        output = grayedge(cvimg)
+        output = acce(cvimg)
         return output
 
     def handleInterrupt(self, signal, frame):
