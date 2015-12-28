@@ -91,4 +91,7 @@
 
 ## Improved practices 
   - [py.test](http://pytest.org/latest/)
+  - [using numba](http://numba.pydata.org/)
+  - [Speeding up numpy, weave, cython](http://technicaldiscovery.blogspot.my/2011/06/speeding-up-python-numpy-cython-and.html)
+  - [Efficient Overlapping Windows with Numpy](http://www.johnvinyard.com/blog/?p=268)
   
