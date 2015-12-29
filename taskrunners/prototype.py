@@ -1,10 +1,13 @@
 #!/usr/bin/env python
 import signal
 from collections import deque
+from timeit import timeit
 
+from numba import autojit
 import rospy
 import cv2
 import numpy as np 
+from scipy.ndimage.filters import minimum_filter,uniform_filter
 from sensor_msgs.msg import CompressedImage
 
 from configs.base_config import BaseConfig
@@ -13,25 +16,38 @@ from detectors.utils.conversion import *
 from detectors.utils.stats import *
 
 
-def acce(img):
-    "Automatic Color Contrast Enhancement"""
-    b,g,r = cv2.split(img)
-    y,u,v = cv2.split(cv2.cvtColor(img, cv2.COLOR_BGR2YUV))
-    y = np.float32(y)/255.0
-    u = np.float32(u)/255.0
-    v = np.float32(v)/255.0
-    y_adjust = 0.5 - np.mean(y)
-    y_n = y + y_adjust*(1 - y)
-    u_adjust = 0.04 - np.mean(u)
-    u_n = u + u_adjust*(0.596 - u)
-    v_adjust = -0.04 - np.mean(v)
-    v_n = v + v_adjust*(0.523 - v)
-    F = cv2.cvtColor(cv2.merge((np.uint8(y_n*255), np.uint8(u_n*255), np.uint8(v_n*255))), cv2.COLOR_YUV2BGR)
-    V_min = max(np.max([np.min(b)/255.0, np.min(g)/255.0, np.min(r)/255.0]), 0.008)
-    V_max = min(np.max([np.max(b)/255.0, np.max(g)/255.0, np.max(r)/255.0]), 0.992)
-    output = np.divide((F - V_min), V_max - V_min)
-    return np.uint8(output)
 
+def calcTransmissionMap(img,airlight):
+    A_b, A_g, A_r = airlight
+    A_r = 255 - A_r + 0.001   #Prevent division by zero
+    out = np.empty_like(img, dtype=np.float32)
+    row, col = img.shape[:2]
+    for x in xrange(row):
+        for y in xrange(col):
+            x_init = max(x-1, 0)
+            x_final = min(x+2, row-1)
+            y_init = max(y-1,0)
+            y_final = min(y+2, col-1)
+            out[x,y,0] = np.min(img[x_init:x_final, y_init:y_final,0])/A_b
+            out[x,y,1] = np.min(img[x_init:x_final, y_init:y_final,1])/A_g
+            out[x,y,2] = np.min(255 - img[x_init:x_final, y_init:y_final,2])/A_r
+    out =  np.max(1 - np.min(out, axis=2), 0.1) #0.1 is the minimum transmission map value
+    return out
+
+tMap = autojit(calcTransmissionMap)
+
+def waterlight_estimation(img):
+    """Estimate brighest pixel in the image"""
+    img = np.float32(img)
+    b,g,r = cv2.split(np.float32(img))
+    minval,maxval,minloc,maxloc = cv2.minMaxLoc(r)
+    waterlight = img[maxloc[1], maxloc[0]]
+    return waterlight
+
+def redchannelprior(img):
+    airlight = waterlight_estimation(img)
+    t = tMap(img, airlight)
+    return img
 
 def minkowski_norm(grayimg, p):
     white_grayimg = np.power(np.sum(np.power(grayimg, p)), 1.0/p)
@@ -170,7 +186,7 @@ class Prototype(object):
         return output
 
     def detect(self, cvimg):
-        output = acce(cvimg)
+        output = redchannelprior(cvimg)
         return output
 
     def handleInterrupt(self, signal, frame):
@@ -183,7 +199,7 @@ class Prototype(object):
 
     '''Callbacks''' 
     def cam_cb(self, rosimg):
-        cvimg = resize(readCompressed(rosimg), 2.0)   #Scale down original image by 3
+        cvimg = resize(readCompressed(rosimg), 3.0)   #Scale down original image by 3
         self.addImg(cvimg)
         output = writeCompressed(self.detect(cvimg))
         self.processed.publish(output)
