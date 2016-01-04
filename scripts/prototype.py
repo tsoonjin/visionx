@@ -16,7 +16,6 @@ from detectors.utils.conversion import *
 from detectors.utils.stats import *
 
 
-
 def calcTransmissionMap(img,airlight):
     A_b, A_g, A_r = airlight
     A_r = 255 - A_r + 0.001   #Prevent division by zero
@@ -186,7 +185,7 @@ class Prototype(object):
         return output
 
     def detect(self, cvimg):
-        output = redchannelprior(cvimg)
+        output = cvimg
         return output
 
     def handleInterrupt(self, signal, frame):
