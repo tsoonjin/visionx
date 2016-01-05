@@ -3,17 +3,15 @@ import signal
 from collections import deque
 from timeit import timeit
 
-from numba import autojit
 import rospy
 import cv2
 import numpy as np 
+from numba import autojit
 from scipy.ndimage.filters import minimum_filter,uniform_filter
 from sensor_msgs.msg import CompressedImage
 
-from configs.base_config import BaseConfig
-from rosbridge.base_comm import BaseComm
-from detectors.utils.conversion import *
-from detectors.utils.stats import *
+from vision_lib.conversion import *
+from vision_lib.stats import *
 
 
 def calcTransmissionMap(img,airlight):
