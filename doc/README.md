@@ -56,4 +56,12 @@ application of object tracking.
 - ensemble methods and cascade style detection is very efficient 
 - add usage of features and templates as part of algorithm
 
-
+## Robosub deliverable
+- saliency region with opponent color boosting
+- saliency with local entropy 
+- color-rabbit 
+- image recovery for illumination, haze and shadow
+- using simple features for particle based tracking 
+- using temporal cue such as optical flow and motion estimation 
+- deep learning for feature extraction
+- fast r-cnn for object detection
